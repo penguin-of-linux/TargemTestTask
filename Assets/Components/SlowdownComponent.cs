@@ -8,7 +8,6 @@ namespace Assets.Components
 
         void OnTriggerEnter(Collider other)
         {
-            Debug.Log("huj");
             var movableComponent = other.gameObject.GetComponent<MovableObjectComponent>();
             if (movableComponent != null)
             {

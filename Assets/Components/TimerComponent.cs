@@ -7,15 +7,25 @@ public class TimerComponent : MonoBehaviour
 
     void Start()
     {
-        Value = Time.time;
+        Value = 0;
+        startValue = 0;
         textComponent = GetComponent<Text>();
     }
 
     void Update()
     {
-        if (Time.time - Value >= 1)
-            textComponent.text = $"Времени прошло: {(int)(Value = Time.time)}";
+        if (Time.time - startValue - Value >= 1)
+            Value++;
+        textComponent.text = $"Времени прошло: {Value}";
+    }
+
+    public void Reset()
+    {
+        startValue = Time.time;
+        Value = 0;
+        Update();
     }
 
     private Text textComponent;
+    private float startValue;
 }
