@@ -11,13 +11,11 @@ public class RicoshetComponent : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        var otherRigidBody = other.rigidbody;
-        var otherRicoshetComponent = otherRigidBody.GetComponent<RicoshetComponent>();
+        var otherRicoshetComponent = other.gameObject.GetComponent<RicoshetComponent>();
         if (otherRicoshetComponent != null)
         {
-            var otherDirection = otherRigidBody.velocity;
-            rigidBody.AddForce(RicoshetForce * otherDirection.normalized);
-            Debug.Log("huj");
+            var direction = transform.position - other.gameObject.transform.position;
+            rigidBody.AddForce(RicoshetForce * direction.normalized);
         }
     }
 

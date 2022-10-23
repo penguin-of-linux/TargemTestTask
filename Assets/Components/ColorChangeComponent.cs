@@ -2,14 +2,25 @@ using UnityEngine;
 
 public class ColorChangeComponent : MonoBehaviour
 {
+    private void Start()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        var meshRenderer = GetComponent<MeshRenderer>();
-        var myParentId = transform.parent.gameObject.GetInstanceID();
-        var otherParentId = other.transform.parent.gameObject.GetInstanceID();
-        if (meshRenderer != null && myParentId != otherParentId)
-        {
-            meshRenderer.material.color = Color.red;
-        }
+        HandleCollision();
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        HandleCollision();
+    }
+
+    private void HandleCollision()
+    {
+        meshRenderer.material.color = Color.red;        
+    }
+
+    private MeshRenderer meshRenderer;
 }

@@ -8,9 +8,11 @@ namespace Assets.Components
 
         void OnTriggerEnter(Collider other)
         {
+            Debug.Log("huj");
             var movableComponent = other.gameObject.GetComponent<MovableObjectComponent>();
             if (movableComponent != null)
             {
+                originalDrag = movableComponent.RigidBody.drag;
                 movableComponent.RigidBody.drag = Drag;
                 movableComponent.GravityEnabled = false;
             }
@@ -22,8 +24,10 @@ namespace Assets.Components
             if (movableComponent != null)
             {
                 movableComponent.GravityEnabled = true;
-                movableComponent.RigidBody.drag = 0;
+                movableComponent.RigidBody.drag = originalDrag;
             }
         }
+
+        private float originalDrag;
     }
 }
